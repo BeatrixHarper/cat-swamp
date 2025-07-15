@@ -1,18 +1,15 @@
 {
   "$GMObject":"",
-  "%Name":"hitme",
+  "%Name":"dsorter",
   "eventList":[],
   "managed":true,
-  "name":"hitme",
+  "name":"dsorter",
   "overriddenProperties":[],
   "parent":{
     "name":"Objects",
     "path":"folders/Objects.yy",
   },
-  "parentObjectId":{
-    "name":"dsorter",
-    "path":"objects/dsorter/dsorter.yy",
-  },
+  "parentObjectId":null,
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,

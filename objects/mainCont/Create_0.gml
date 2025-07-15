@@ -7,4 +7,13 @@ global.numfont = font_add_sprite_ext(fntPixel, "abcdefghijklmnopqrstuvwxyz123456
 currentTime = 0;
 deadTimer = 0;
 
+global.inPauseMenu = false;
 global.points = 0;
+
+timer = 0;
+
+currentHealth = 0;
+currentMaxHealth = 0;
+currentViewScale = 0;
+currentGuiScale = 0;
+pauseScreenshot = -1;

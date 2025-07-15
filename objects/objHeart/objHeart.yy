@@ -14,7 +14,10 @@
     "name":"Objects",
     "path":"folders/Objects.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"dsorter",
+    "path":"objects/dsorter/dsorter.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
@@ -33,8 +36,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"Sprite18",
-    "path":"sprites/Sprite18/Sprite18.yy",
+    "name":"sprHeart",
+    "path":"sprites/sprHeart/sprHeart.yy",
   },
   "spriteMaskId":null,
   "visible":true,

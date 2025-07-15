@@ -1,6 +1,6 @@
 if other.team != team{
 	with(other){
-		myHealth -= other.damage;
+		myHealth = max(myHealth - other.damage, 0);
 		if(variable_instance_exists(self, "on_hit")) { on_hit(); }
 	}
 	

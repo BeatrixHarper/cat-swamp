@@ -1,5 +1,7 @@
 #macro view view_camera[0]
 
+depth_grid = ds_grid_create(1, 1);
+
 global.fullscreen = false;
 
 viewWidth = 256;

@@ -7,7 +7,6 @@ maxHealth = 20;
 myHealth = maxHealth;
 
 meleeDamage = 2;
-team = tm.enemy;
 
 sprite_index = sprIdle;
 friction = 0.4;
