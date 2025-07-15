@@ -28,7 +28,7 @@ if !global.inPauseMenu{
 	currentTime += 1 / 60;
 
 	if instance_number(objBug) < 10{
-		var _time = currentTime > 120 ? 3 : 2;
+		var _time = currentTime > 120 ? 2 : 3;
 			_realtime = currentTime mod _time;
 	
 		if _realtime = _time - 1{ //bugs
@@ -45,7 +45,7 @@ if !global.inPauseMenu{
 	}
 
 	if instance_number(objBuff) < 3{
-		var _time = currentTime > 120 ? 8 : 6;
+		var _time = currentTime > 120 ? 6 : 8;
 			_realtime = currentTime mod _time;
 	
 		if _realtime = _time - 1{ //buffs
@@ -62,7 +62,7 @@ if !global.inPauseMenu{
 	}
 
 	if instance_number(objWizard) < 3{
-		var _time = currentTime > 120 ? 6 : 5;
+		var _time = currentTime > 120 ? 5 : 6;
 			_realtime = currentTime mod _time;
 	
 		if _realtime = _time - 1{ //wizards
