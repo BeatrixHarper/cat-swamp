@@ -12,3 +12,5 @@ points = 0;
 team = tm.enemy;
 
 sprite_index = sprIdle;
+
+hasiframes = false;

@@ -1,0 +1,1 @@
+if !instance_exists(menuCont) instance_create_depth(0, 0, 0, menuCont);

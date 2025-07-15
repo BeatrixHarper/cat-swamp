@@ -1,1 +1,1 @@
-draw_gui();
+if room = rm1 draw_gui();

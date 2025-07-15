@@ -14,8 +14,8 @@
   "name":"objWizard",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"Enemies",
+    "path":"folders/Objects/Enemies.yy",
   },
   "parentObjectId":{
     "name":"enemy",
@@ -39,9 +39,12 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"sprWizardIdle",
-    "path":"sprites/sprWizardIdle/sprWizardIdle.yy",
+    "name":"sprWizardIdleRight",
+    "path":"sprites/sprWizardIdleRight/sprWizardIdleRight.yy",
   },
-  "spriteMaskId":null,
+  "spriteMaskId":{
+    "name":"mskWizard",
+    "path":"sprites/mskWizard/mskWizard.yy",
+  },
   "visible":true,
 }

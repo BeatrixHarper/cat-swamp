@@ -3,7 +3,7 @@ enum alarms {
 	iframes,
 }
 
-image_speed = 0.2;
+image_speed = 0.1;
 
 friction = 0.2;
 canControl = true;
@@ -16,7 +16,7 @@ maxHealth = 6;
 myHealth = maxHealth;
 
 sprIdle = sprPlayerIdle;
-sprWalk = sprIdle;
+sprWalk = sprPlayerWalk;
 
 wKick = 0;
 team = tm.player;
@@ -34,6 +34,8 @@ nextDash = 0;
 
 right = false;
 gunAngle = point_direction(x, y, mouse_x, mouse_y);
+
+hasiframes = true;
 
 stateFree = function() {
 	mMove[move.left] = keyboard_check(ord("A"));
@@ -61,6 +63,8 @@ stateFree = function() {
 	
 	if speed > maxSpeed speed -= friction * speed;
 	if wKick > 0 wKick-- else wKick = 0;
+	
+	if speed > 0 sprite_index = sprWalk else sprite_index = sprIdle;
 	
 	gunAngle = point_direction(x, y, mouse_x, mouse_y);
 	

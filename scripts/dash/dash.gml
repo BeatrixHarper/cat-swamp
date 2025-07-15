@@ -7,6 +7,7 @@ function dash(){
 			motion_add(dashDir * 90, dashSpeed);
 			coolDown = coolDownMax;
 			canDash = false;
+			
 			alarm[alarms.iframes] = 20;
 		}
 	}

@@ -4,4 +4,5 @@ if objPlayer.myHealth < objPlayer.maxHealth{
 	}
 }
 
+instance_create_depth(x, y, depth, objPoint, {text : other.points});
 global.points += points;

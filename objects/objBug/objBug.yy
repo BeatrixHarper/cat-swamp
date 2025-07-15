@@ -11,8 +11,8 @@
   "name":"objBug",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"Enemies",
+    "path":"folders/Objects/Enemies.yy",
   },
   "parentObjectId":{
     "name":"enemy",
@@ -39,6 +39,9 @@
     "name":"sprBugIdle",
     "path":"sprites/sprBugIdle/sprBugIdle.yy",
   },
-  "spriteMaskId":null,
+  "spriteMaskId":{
+    "name":"mskBug",
+    "path":"sprites/mskBug/mskBug.yy",
+  },
   "visible":true,
 }

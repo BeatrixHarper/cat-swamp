@@ -1,30 +1,39 @@
 event_inherited();
 
-sprIdle = sprBuffIdle;
-sprWalk = sprIdle;
+sprWalkRight = sprBuffWalkRight;
+sprWalkLeft = sprBuffWalkLeft;
 
-maxHealth = 20;
+maxHealth = 14;
 myHealth = maxHealth;
 
 meleeDamage = 2;
 
 sprite_index = sprIdle;
-friction = 0.4;
+friction = 0.5;
+
+image_speed = 0;
 
 idle = 0;
 
-points = 80;
+points = 100;
+
+currentStep = 0;
 
 stateIdle = function() {
-	if idle++ > 60{
-		direction = point_direction(x, y, objPlayer.x, objPlayer.y);
-		speed = 7;
+	image_speed = 0;
+	
+	if idle++ > random_range(40, 50){
+		direction = point_direction(x, y, objPlayer.x + objPlayer.hspeed * 1.2 + random_range(-5, 5), objPlayer.y + objPlayer.vspeed * 1.2 + random_range(-5, 5));
+		speed = 10;
 		idle = 0;
+		currentStep = currentStep ? 0 : 1;
 		state = stateWalk;
 	}
 }
 
 stateWalk = function() {
+	image_speed = 0.2;
+	
 	if speed <= 0 state = stateIdle;
 }
 

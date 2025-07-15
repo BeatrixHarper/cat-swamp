@@ -11,8 +11,8 @@
   "name":"objBuff",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"Enemies",
+    "path":"folders/Objects/Enemies.yy",
   },
   "parentObjectId":{
     "name":"enemy",
@@ -36,9 +36,12 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"sprBuffIdle",
-    "path":"sprites/sprBuffIdle/sprBuffIdle.yy",
+    "name":"sprBuffWalkRight",
+    "path":"sprites/sprBuffWalkRight/sprBuffWalkRight.yy",
   },
-  "spriteMaskId":null,
+  "spriteMaskId":{
+    "name":"mskBuff",
+    "path":"sprites/mskBuff/mskBuff.yy",
+  },
   "visible":true,
 }
