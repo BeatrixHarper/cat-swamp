@@ -1,4 +1,4 @@
-if state != stateTransitionFromGame{
+if state != stateTransitionFromMenu{
 	var frq = 0.1,
 		amp = 0.08,
 		posX = (room_width / 2) - (sprite_get_width(sprLogo) / 2),

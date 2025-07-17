@@ -20,7 +20,9 @@ for(var i = 0; i < ds_grid_height(depth_grid); i++) {
 	inst = depth_grid[# 0, i];
 	with(inst) {
 		depth = -i;
-
+		
+		if(variable_instance_exists(self, "draw_shadow")) { draw_shadow() };
+		
 		if(variable_instance_exists(self, "on_draw")) { on_draw(); }
 		else draw_sprite_ext(sprite_index, image_index, x, y, image_xscale, image_yscale, image_angle, image_blend, image_alpha * visible);
 	}

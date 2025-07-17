@@ -27,10 +27,7 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":{
-    "name":"sprWall",
-    "path":"sprites/sprWall/sprWall.yy",
-  },
+  "spriteId":null,
   "spriteMaskId":null,
   "visible":false,
 }

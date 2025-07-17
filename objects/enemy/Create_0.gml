@@ -1,5 +1,7 @@
 right = false;
 
+canHit = true;
+
 sprIdle = sprBugIdle;
 sprWalk = sprIdle;
 

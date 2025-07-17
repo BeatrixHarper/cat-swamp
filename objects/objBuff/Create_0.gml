@@ -6,12 +6,17 @@ sprWalkLeft = sprBuffWalkLeft;
 maxHealth = 14;
 myHealth = maxHealth;
 
+shadowSprite = sprShadowBig;
+shadowX = 0;
+shadowY = 12;
+
 meleeDamage = 2;
 
 sprite_index = sprIdle;
 friction = 0.5;
 
 image_speed = 0;
+
 
 idle = 0;
 
@@ -38,3 +43,5 @@ stateWalk = function() {
 }
 
 state = stateIdle;
+
+draw_shadow = function() { draw_sprite(shadowSprite, 0, x + shadowX, y + shadowY); }

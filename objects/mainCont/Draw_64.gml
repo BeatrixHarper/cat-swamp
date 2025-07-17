@@ -1,8 +1,8 @@
 if room = rm1{
 	if global.inPauseMenu{
-		draw_gui();
-	
 		if sprite_exists(pauseScreenshot) draw_sprite_ext(pauseScreenshot, 0, 0, 0, 1 / currentViewScale * currentGuiScale, 1 / currentViewScale * currentGuiScale, image_angle, image_blend, image_alpha);
+	
+		draw_gui();
 	
 		timer++;
 	
@@ -17,3 +17,5 @@ if room = rm1{
 		draw_text_underline(posX, posY, "paused", c_white, c_black);
 	}
 }
+
+state();

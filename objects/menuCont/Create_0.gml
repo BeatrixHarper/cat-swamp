@@ -1,5 +1,3 @@
-//room = rm1;
-
 timer = 0;
 flickertimer = 0;
 draw = true;
@@ -69,22 +67,18 @@ stateSelect = function(){
 }
 
 stateTransitionToGame = function() {
-	draw_sprite(transitionSprite, 0, transitionX, transitionY);
-	
-	transitionX = lerp(transitionX, 0, 0.12);
-	
-	if round(transitionX) >= -1{
+	if draw_transition(0){
 		room_goto_next();
-		state = stateTransitionFromGame;
+		transitionX += room_width;
+		
+		state = stateTransitionFromMenu;
 	}
 }
 
-stateTransitionFromGame = function() {
-	draw_sprite(transitionSprite, 0, transitionX, transitionY);
-	
-	transitionX = lerp(transitionX, -sprite_get_width(transitionSprite), 0.2);
-	
-	if round(transitionX) <= -sprite_get_width(transitionSprite) + 20 instance_destroy();
+stateTransitionFromMenu = function() {
+	if draw_transition(1){
+		instance_destroy();
+	}
 }
 
 state = stateInitial;

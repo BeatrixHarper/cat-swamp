@@ -1,1 +1,1 @@
-collide();
+collide(objWall);

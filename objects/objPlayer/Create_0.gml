@@ -3,7 +3,7 @@ enum alarms {
 	iframes,
 }
 
-image_speed = 0.1;
+image_speed = 0.2;
 
 friction = 0.2;
 canControl = true;
@@ -12,11 +12,17 @@ maxSpeed = 1.4 + friction;
 
 canHit = true;
 
+right = false;
+gunAngle = point_direction(x, y, mouse_x, mouse_y);
+
 maxHealth = 6;
 myHealth = maxHealth;
 
 sprIdle = sprPlayerIdle;
 sprWalk = sprPlayerWalk;
+shadowSprite = sprShadow;
+shadowX = 0;
+shadowY = 5;
 
 wKick = 0;
 team = tm.player;
@@ -31,9 +37,6 @@ dashSpeed = 14;
 
 dashDir = 0;
 nextDash = 0;
-
-right = false;
-gunAngle = point_direction(x, y, mouse_x, mouse_y);
 
 hasiframes = true;
 
@@ -81,10 +84,19 @@ stateFree = function() {
 	if mMovePressed[move.down]{ dashDir = move.down; dash(); }
 	if mMovePressed[move.up]{ dashDir = move.up; dash(); }
 	
-	if myHealth <= 0 state = stateDead;
+	if myHealth <= 0{
+		var _rand = 10;
+		repeat(random_range(3, 5)) instance_create_depth(x + random_range(-_rand, _rand), y + random_range(-_rand, _rand), depth, objChunks);
+		
+		mask_index = sprNone;
+		
+		state = stateDead;
+	}
 }
 
 stateDead = function() {};
+
+draw_shadow = function() { if state != stateDead draw_sprite(shadowSprite, 0, x + shadowX, y + shadowY); }
 
 on_draw = function() {
 	if state != stateDead{
@@ -92,11 +104,12 @@ on_draw = function() {
 			_gunangle = gunAngle,
 			_right = right,
 			_wkick = wKick,
+			_yOffset = 5,
 	
 			_sprite = sprGun,
 			_frame = 0,
 			_x = x + lengthdir_x(_gundis - _wkick, _gunangle),
-			_y = y + lengthdir_y(_gundis - _wkick, _gunangle),
+			_y = y + lengthdir_y(_gundis - _wkick, _gunangle) - _yOffset,
 			_xscale = image_xscale * _right,
 			_yscale = image_yscale * _right,
 			_angle = _gunangle + (_wkick * 10 * _right),
@@ -105,7 +118,7 @@ on_draw = function() {
 
 		if _gunangle <= 180 draw_underline_ext(_sprite, _frame, _x, _y, _xscale, _yscale, _angle, _blend, _alpha, c_black);
 		if alarm[alarms.iframes] > 0 image_alpha = 0.5;
-		draw_underline_ext(sprite_index, image_index, x, y, image_xscale, image_yscale, image_angle, image_blend, image_alpha, c_black);
+		draw_underline_ext(sprite_index, image_index, x, y - _yOffset, image_xscale, image_yscale, image_angle, image_blend, image_alpha, c_black);
 		image_alpha = 1;
 		if _gunangle > 180 draw_underline_ext(_sprite, _frame, _x, _y, _xscale, _yscale, _angle, _blend, _alpha, c_black);
 	}

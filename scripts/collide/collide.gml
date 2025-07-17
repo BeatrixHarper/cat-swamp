@@ -1,9 +1,8 @@
-function collide(){
+function collide(object = collideable){
 	var xspd = hspeed,
 	yspd = vspeed,
 	xfac = max(abs(xspd * 0.1), 0.1),
-	yfac = max(abs(yspd * 0.1), 0.1),
-	object = collideable;
+	yfac = max(abs(yspd * 0.1), 0.1);
 
 	x = xprevious;
 	y = yprevious;

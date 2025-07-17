@@ -12,7 +12,13 @@ sprIdle = sprBugIdle;
 maxHealth = 2;
 myHealth = maxHealth;
 
+shadowSprite = sprShadow;
+shadowX = 0;
+shadowY = 18;
+
 points = 50;
+
+draw_shadow = function() { draw_sprite(shadowSprite, 0, x + shadowX, y + shadowY); }
 
 on_wall_x = function() {
 	if alarm[0] <= 0{
