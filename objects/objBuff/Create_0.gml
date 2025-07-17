@@ -39,7 +39,7 @@ stateIdle = function() {
 stateWalk = function() {
 	image_speed = 0.2;
 	
-	if speed <= 0 state = stateIdle;
+	if speed <= 0{ screenshake(1, 3, 0.2); state = stateIdle; }
 }
 
 state = stateIdle;

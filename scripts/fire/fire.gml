@@ -7,5 +7,7 @@ function fire(){
 		damage = 2;
 	}
 	
+	screenshake(1, 1, 0.2);
+	
 	//instance_create_depth(mouse_x, mouse_y, depth, objHeart);
 }

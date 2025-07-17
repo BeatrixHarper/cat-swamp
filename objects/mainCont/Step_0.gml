@@ -17,6 +17,7 @@ if room = rm1{
 				currentMaxHealth = objPlayer.maxHealth;
 
 				instance_deactivate_all(true);
+				instance_activate_object(__InputUpdateController);
 			}
 			else if !global.inPauseMenu{
 				if sprite_exists(pauseScreenshot){
@@ -78,12 +79,29 @@ if room = rm1{
 		}
 
 		if objPlayer.state = objPlayer.stateDead{
+			if global.highscore < global.points{
+				global.highscore = global.points;
+			
+				ini_open("save.ini")
+				ini_write_real("score", "highscore", global.highscore);
+				ini_close();
+				
+				global.newScore = true;
+			}
+			
 			deadTimer++;
 		}
 
 		if deadTimer > 30 && objPlayer.state = objPlayer.stateDead{
-			if keyboard_check_pressed(vk_enter){ deadTimer = 0; state = stateStartNewRun; }
+			if keyboard_check_pressed(vk_space){ deadTimer = 0; state = stateStartNewRun; }
 			if keyboard_check_pressed(vk_escape){ deadTimer = 0; state = stateTransitionFromGame; }
+		}
+	}
+	
+	if instance_exists(objPlayer){
+		if InputDeviceGetPlayerUsingGamepad() = 0{
+			InputCursorElasticSet(objPlayer.x, objPlayer.y, 0.4, 0, false);
+			InputCursorLimitCircle(objPlayer.x, objPlayer.y, 32);
 		}
 	}
 }
@@ -91,4 +109,11 @@ if room = rm1{
 if keyboard_check_pressed(vk_f4){
 	global.fullscreen = global.fullscreen ? 0 : 1;
 	window_set_fullscreen(global.fullscreen);
+}
+
+if !global.inPauseMenu{
+	//fog
+	if random(10) <= 1 && instance_number(objFog) < 3{
+		instance_create_depth(x, y, depth, objFog);	
+	}	
 }

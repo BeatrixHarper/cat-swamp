@@ -16,3 +16,8 @@ window_set_size(scaledWidth, scaledHeight);
 surface_resize(application_surface, scaledWidth, scaledHeight);
 
 resized = false;
+
+shake = true;
+shakeTime = 0;
+shakeMagnitude = 0;
+shakeFade = 0.25;

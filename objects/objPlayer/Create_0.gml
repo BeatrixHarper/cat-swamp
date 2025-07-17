@@ -1,6 +1,7 @@
 enum alarms {
 	dashinput,
 	iframes,
+	dashdelay,
 }
 
 image_speed = 0.2;
@@ -39,6 +40,9 @@ dashDir = 0;
 nextDash = 0;
 
 hasiframes = true;
+
+hit = false;
+hitalarm = -1;
 
 stateFree = function() {
 	mMove[move.left] = keyboard_check(ord("A"));
@@ -79,16 +83,34 @@ stateFree = function() {
 	if coolDown coolDown--;
 	if mouse_check_button(mb_left) && coolDown <= 0 fire();
 	
-	if mMovePressed[move.left]{ dashDir = move.left; dash(); }
-	if mMovePressed[move.right]{ dashDir = move.right; dash(); }
-	if mMovePressed[move.down]{ dashDir = move.down; dash(); }
-	if mMovePressed[move.up]{ dashDir = move.up; dash(); }
+	if (hit && hitalarm = -1) {
+	   hitalarm = 1;
+	}
+
+	if hitalarm > 0 hitalarm -= 0.1 else if hitalarm <= 0{ hitalarm = -1; hit = false; }
 	
+	if alarm[alarms.dashdelay] <= 0{
+		switch(global.dashInputType){
+			case dashinput.double:
+				for(var i = 0; i < 4; i++){
+					if mMovePressed[i]{ dashDir = i; dash_check(); }	
+				}
+			break;
+			case dashinput.space:
+				for(var i = 0; i < 4; i++){
+					if mMove[i] && keyboard_check_pressed(vk_space){ dashDir = i; dash(); }	
+				}
+			break;
+		}
+	}
+
 	if myHealth <= 0{
 		var _rand = 10;
 		repeat(random_range(3, 5)) instance_create_depth(x + random_range(-_rand, _rand), y + random_range(-_rand, _rand), depth, objChunks);
 		
 		mask_index = sprNone;
+		
+		screenshake(5, 10, 0.3);
 		
 		state = stateDead;
 	}
@@ -117,9 +139,18 @@ on_draw = function() {
 			_alpha = image_alpha;
 
 		if _gunangle <= 180 draw_underline_ext(_sprite, _frame, _x, _y, _xscale, _yscale, _angle, _blend, _alpha, c_black);
-		if alarm[alarms.iframes] > 0 image_alpha = 0.5;
-		draw_underline_ext(sprite_index, image_index, x, y - _yOffset, image_xscale, image_yscale, image_angle, image_blend, image_alpha, c_black);
-		image_alpha = 1;
+		//if alarm[alarms.iframes] > 0 image_alpha = 0.5;
+		
+		if (hit) {
+		    shader_set(shd_hit);
+		    draw_sprite_ext(sprite_index, image_index, x, y - _yOffset, image_xscale, image_yscale, image_angle, image_blend, image_alpha);
+		    shader_reset();
+
+		} else {
+		    draw_underline_ext(sprite_index, image_index, x, y - _yOffset, image_xscale, image_yscale, image_angle, image_blend, image_alpha, c_black);
+		}
+		
+		//image_alpha = 1;
 		if _gunangle > 180 draw_underline_ext(_sprite, _frame, _x, _y, _xscale, _yscale, _angle, _blend, _alpha, c_black);
 	}
 }

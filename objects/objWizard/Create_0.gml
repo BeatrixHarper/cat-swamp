@@ -69,6 +69,15 @@ on_draw = function() {
 	//draw_sprite(shadowSprite, 0, x + shadowX, y + shadowY);
 	
 	if _gunangle <= 180 draw_underline_ext(_sprite, _frame, _x, _y, _xscale, _yscale, _angle, _blend, _alpha, c_black);
-	draw_underline_ext(sprite_index, image_index, x, y, image_xscale, image_yscale, image_angle, image_blend, image_alpha, c_black);
+	
+	if (hit) { 
+	    shader_set(shd_hit);
+	    draw_sprite_ext(sprite_index, image_index, x, y, image_xscale, image_yscale, image_angle, image_blend, image_alpha);
+	    shader_reset();
+
+	} else {
+	    draw_underline_ext(sprite_index, image_index, x, y, image_xscale, image_yscale, image_angle, image_blend, image_alpha, c_black);
+	}
+	
 	if _gunangle > 180 draw_underline_ext(_sprite, _frame, _x, _y, _xscale, _yscale, _angle, _blend, _alpha, c_black);	
 }

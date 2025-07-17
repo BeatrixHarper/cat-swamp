@@ -14,7 +14,20 @@ if room = rm1{
 		draw_set_color(c_white);
 		draw_set_halign(fa_center);
 		draw_set_valign(fa_center);
+		draw_set_font(global.timefont);
 		draw_text_underline(posX, posY, "paused", c_white, c_black);
+		draw_text_underline(posX, 180, "escape to unpause\n\nspace to exit");
+		
+		if keyboard_check(vk_space){
+			global.inPauseMenu = false;
+			
+			if sprite_exists(pauseScreenshot){
+				sprite_delete(pauseScreenshot);	
+			}
+			instance_activate_all();
+			
+			state = stateTransitionFromGame;
+		}
 	}
 }
 

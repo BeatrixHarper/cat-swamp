@@ -3,15 +3,24 @@ instance_create_depth(x, y, depth, visCont);
 randomise();
 
 global.numfont = font_add_sprite_ext(fntPixel, "abcdefghijklmnopqrstuvwxyz1234567890,/", false, 1);
-global.numfontbig = font_add_sprite_ext(fntPixelBig, "abcdefghijklmnopqrstuvwxyz1234567890,/", false, 0);
-global.timefont = font_add_sprite_ext(fntTime, "1234567890", false, 1);
+global.timefont = font_add_sprite_ext(fntTime, "abcdefghijklmnopqrstuvwxyz1234567890-%CFS<>V^:", false, 1);
 
 currentTime = 0;
 deadTimer = 0;
 
 global.inPauseMenu = false;
-global.points = 0;
 global.fullscreen = false;
+global.points = 0;
+
+ini_open("save.ini");
+global.highscore = ini_read_real("score", "highscore", 0);
+
+global.dashInputType = ini_read_real("settings", "dashinputtype", dashinput.double);
+global.volume = ini_read_real("settings", "volume", 100);
+global.screenshake = ini_read_real("settings", "screenshake", 100);
+ini_close();
+
+global.newScore = false;
 
 timer = 0;
 
@@ -39,6 +48,7 @@ stateTransitionFromGame = function(){
 stateTransitionToMenu = function(){
 	if draw_transition(1){
 		global.points = 0;
+		global.newScore = false;
 		mainCont.currentTime = 0;
 		state = stateNone;
 	}
@@ -47,6 +57,7 @@ stateTransitionToMenu = function(){
 stateStartNewRun = function(){
 	if draw_transition(0){
 		global.points = 0;
+		global.newScore = false;
 		mainCont.currentTime = 0;
 		transitionX += room_width;
 		

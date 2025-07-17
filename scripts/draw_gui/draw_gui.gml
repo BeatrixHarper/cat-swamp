@@ -36,13 +36,13 @@ function draw_gui(){
 	draw_set_valign(fa_middle);
 	draw_set_font(global.timefont);
 	
-	draw_text_underline(room_width / 2, room_height - 8, floor(_srt));
+	draw_text_underline(room_width / 2, room_height - 8, string("C ") + string(floor(_srt)));
 
 	draw_set_halign(fa_right);
 	draw_set_valign(fa_top);
 	draw_set_font(global.numfont);
 	
-	draw_text_underline(room_width - 8, 8, "score: " + string_fix(global.points, 6));
+	draw_text_underline(room_width - 8, 8, "score " + string_fix(global.points, 6));
 	
 	if !global.inPauseMenu{
 		if objPlayer.state = objPlayer.stateDead{
@@ -52,7 +52,10 @@ function draw_gui(){
 			var _x = room_width / 2,
 				_y = room_height / 2;
 			
-			draw_text_underline(_x, _y, "you died" + "\n\nscore: " + string(global.points) + "\n\n\n\npress enter to restart\n\npress escape to exit");
+			var highscore = global.newScore ? "\n\n\n\nnew highscore!" : "\n\n";
+			
+			draw_set_font(global.timefont);
+			draw_text_underline(_x, _y, "you died" + highscore + "\n\nscore: " + string(global.points) + "\n\n\n\npress space to restart\n\npress escape to exit");
 		}
 	}
 }
