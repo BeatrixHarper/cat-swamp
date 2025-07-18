@@ -38,6 +38,8 @@ mouse_yprevious = mouse_y;
 
 stateInitial = function() {
 	if InputPressed(INPUTS.CONFIRM){
+		play_sfx(sndEnterGame, 0, 1, true);
+		
 		state = stateSelect;
 		for(var i = 0; i < optionCount; i++){
 			xRoot = -20;
@@ -70,7 +72,7 @@ stateInitial = function() {
 }
 
 stateSelect = function(){
-	if InputPressed(INPUTS.BACK) state = stateInitial;
+	if InputPressed(INPUTS.BACK){ play_sfx(sndDeselect, 0, 1, true); state = stateInitial; }
 	
 	draw_set_font(global.timefont);
 	
@@ -97,15 +99,13 @@ stateSelect = function(){
 			if (mouse_x != mouse_xprevious or mouse_y != mouse_yprevious){
 				currentSelection = i;
 			}
-			
-			selecting = true;
-			continue;
 		}
 	}
 	
-	if (selecting && InputPressed(INPUTS.MOUSECONFIRM)) or InputPressed(INPUTS.CONFIRM){
+	if InputPressed(INPUTS.CONFIRM){
 		switch(currentSelection){
 			case 0:
+				play_sfx(sndSlide, 0, 1, true);
 				state = stateTransitionToGame;
 			break;
 			case 1:
@@ -121,6 +121,8 @@ stateSelect = function(){
 				state = stateInitial;
 			break;
 		}
+		
+		play_sfx(sndSelect, 0, 1, true);
 	}
 	
 	draw_text_underline(currentX[0], yOrigin, selectionString[0]);
@@ -129,7 +131,7 @@ stateSelect = function(){
 }
 
 stateSettings = function(){
-	if InputPressed(INPUTS.BACK) state = stateSelect;
+	if InputPressed(INPUTS.BACK){ play_sfx(sndDeselect, 0, 1, true); state = stateSelect; }
 	
 	draw_set_font(global.timefont);
 	
@@ -155,13 +157,10 @@ stateSettings = function(){
 			if (mouse_x != mouse_xprevious or mouse_y != mouse_yprevious){
 				currentSettingsSelection = i;
 			}
-			
-			settingsSelecting = true;
-			continue;
 		}
 	}
 	
-	if (settingsSelecting && InputPressed(INPUTS.MOUSECONFIRM)) or InputPressed(INPUTS.CONFIRM){
+	if InputPressed(INPUTS.CONFIRM){	
 		switch(currentSettingsSelection){
 			case 0:
 				global.dashInputType = global.dashInputType ? 0 : 1;
@@ -190,6 +189,8 @@ stateSettings = function(){
 				}
 			break;
 		}
+		
+		play_sfx(sndSelect, 0, 1, true);
 	}
 	
 	draw_text_underline(currentSettingsX[0], yOrigin, settingsString[0]);
@@ -208,7 +209,7 @@ stateSettings = function(){
 }
 
 stateTransitionToGame = function() {
-	if draw_transition(0){
+	if draw_transition(0){		
 		room_goto_next();
 		transitionX += room_width;
 		

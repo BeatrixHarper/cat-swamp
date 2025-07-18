@@ -8,7 +8,7 @@ if other.team != team{
 		}
 	}
 	
-	if other = objPlayer screenshake(1, 1, 0.1); 
+	if other = objPlayer{ play_sfx(sndPlayerHurt, 0.1, 1.1, true); screenshake(1, 1, 0.1); }
 	
 	instance_destroy();
 }

@@ -12,6 +12,10 @@ function dash_check(){
 }
 
 function dash() {
+	play_sfx(sndPlayerDash, 0.1, 1, true);
+	
+	instance_create_layer(x, y, "Instances", objSmoke);
+	
 	motion_set(dashDir * 90, dashSpeed);
 	coolDown = coolDownMax;
 	canDash = false;

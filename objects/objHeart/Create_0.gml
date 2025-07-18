@@ -1,4 +1,4 @@
-alarm[0] = 200;
+alarm[0] = 400;
 
 image_speed = 0.2;
 
@@ -15,3 +15,5 @@ on_draw = function() {
 	
 	if draw draw_self();
 }
+
+play_sfx(sndHealthAppear, 0.1, 1);

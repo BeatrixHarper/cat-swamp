@@ -5,6 +5,8 @@ if room = rm1{
 		global.inPauseMenu = global.inPauseMenu = 0 ? 1 : 0
 
 			if global.inPauseMenu{
+				play_sfx(sndPause, 0, 1, true);
+				
 				if objPlayer.state = objPlayer.stateDead{ global.inPauseMenu = false; exit; }
 				
 				if !sprite_exists(pauseScreenshot){
@@ -92,8 +94,8 @@ if room = rm1{
 		}
 
 		if deadTimer > 30 && objPlayer.state = objPlayer.stateDead{
-			if InputPressed(INPUTS.PAUSE){ deadTimer = 0; state = stateStartNewRun; }
-			if InputPressed(INPUTS.EXITRUN){ deadTimer = 0; state = stateTransitionFromGame; }
+			if InputPressed(INPUTS.PAUSE){ deadTimer = 0; play_sfx(sndSlide, 0, 1, true); state = stateStartNewRun; }
+			if InputPressed(INPUTS.EXITRUN){ deadTimer = 0; play_sfx(sndSlide, 0, 1, true); state = stateTransitionFromGame; }
 		}
 	}
 	

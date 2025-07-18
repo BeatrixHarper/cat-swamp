@@ -25,6 +25,8 @@ if room = rm1{
 		if InputPressed(INPUTS.EXITRUN){
 			global.inPauseMenu = false;
 			
+			play_sfx(sndSlide, 0, 1, true);
+			
 			if sprite_exists(pauseScreenshot){
 				sprite_delete(pauseScreenshot);	
 			}

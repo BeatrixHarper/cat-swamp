@@ -44,7 +44,7 @@ stateTransitionFromGame = function(){
 		transitionX += room_width;
 	
 		state = stateTransitionToMenu;
-	}	
+	}
 }
 
 stateTransitionToMenu = function(){
@@ -52,6 +52,7 @@ stateTransitionToMenu = function(){
 		global.points = 0;
 		global.newScore = false;
 		mainCont.currentTime = 0;
+		
 		state = stateNone;
 	}
 }

@@ -33,6 +33,9 @@ stateIdle = function() {
 		idle = 0;
 		currentStep = currentStep ? 0 : 1;
 		state = stateWalk;
+		
+		screenshake(1, 3, 0.2);
+		play_sfx(sndBuffStomp, 0.1, 1);
 	}
 }
 

@@ -106,6 +106,7 @@ stateFree = function() {
 		
 		mask_index = sprNone;
 		
+		play_sfx(sndPlayerDead, 0.1, 1.1, true);
 		screenshake(5, 10, 0.3);
 		
 		state = stateDead;

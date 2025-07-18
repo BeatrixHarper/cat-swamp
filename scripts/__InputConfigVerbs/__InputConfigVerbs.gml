@@ -11,7 +11,6 @@ function __InputConfigVerbs()
 		PAUSE,
 		EXITRUN,
 		CONFIRM,
-		MOUSECONFIRM,
 		BACK,
 		
 		AIMUP,
@@ -39,8 +38,6 @@ function __InputConfigVerbs()
 	InputDefineVerb(INPUTS.AIMDOWN,		"aimdown",	  undefined,		    gp_axisrv);
 	InputDefineVerb(INPUTS.AIMLEFT,		"aimleft",	  undefined,		   -gp_axisrh);
 	InputDefineVerb(INPUTS.AIMRIGHT,	"aimright",	  undefined,		    gp_axisrh);
-	
-	InputDefineVerb(INPUTS.MOUSECONFIRM, "mbconfirm", mb_left,				undefined);
 	
 if (!INPUT_ON_SWITCH){
 	InputDefineVerb(INPUTS.CONFIRM,		"confirm",	 [vk_space, mb_left],	gp_face2);

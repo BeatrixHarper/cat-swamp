@@ -46,6 +46,8 @@ alarm[0] = random_range(120, 180); //moving
 alarm[1] = random_range(20, 50); //aiming
 alarm[2] = random_range(80, 100); //firing
 
+play_sfx(sndWizardLaugh, 0.1, 0.9, true);
+
 on_hit = function() {
 	alarm[0] = 1;
 }
