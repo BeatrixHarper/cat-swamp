@@ -1,8 +1,8 @@
 if objPlayer.myHealth < objPlayer.maxHealth{
 	if random(4) <= 1{
-		instance_create_depth(x, y, depth, objHeart);
+		instance_create_layer(x, y, "Instances", objHeart);
 	}
 }
 
-instance_create_depth(x, y, depth, objPoint, {text : other.points});
+instance_create_layer(x, y, "Instances", objPoint, {text : other.points});
 global.points += points;

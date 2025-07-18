@@ -1,6 +1,8 @@
-instance_create_depth(x, y, depth, visCont);
+instance_create_layer(x, y, "Instances", visCont);
 
 randomise();
+
+window_set_cursor(cr_none);
 
 global.numfont = font_add_sprite_ext(fntPixel, "abcdefghijklmnopqrstuvwxyz1234567890,/", false, 1);
 global.timefont = font_add_sprite_ext(fntTime, "abcdefghijklmnopqrstuvwxyz1234567890-%CFS<>V^:", false, 1);

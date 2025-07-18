@@ -37,7 +37,7 @@ mouse_xprevious = mouse_x;
 mouse_yprevious = mouse_y;
 
 stateInitial = function() {
-	if keyboard_check_pressed(vk_space) or mouse_check_button_pressed(mb_left){
+	if InputPressed(INPUTS.CONFIRM){
 		state = stateSelect;
 		for(var i = 0; i < optionCount; i++){
 			xRoot = -20;
@@ -62,7 +62,7 @@ stateInitial = function() {
 		flickertimer = 0;
 	}
 	
-	if draw draw_text_underline(posX, 200, "press space");
+	if draw draw_text_underline(posX, 200, InputDeviceGetPlayerUsingGamepad() = 0 ? "press a" : "press start");
 	
 	draw_set_font(global.numfont);
 	draw_set_valign(fa_bottom);
@@ -70,7 +70,7 @@ stateInitial = function() {
 }
 
 stateSelect = function(){
-	if keyboard_check_pressed(vk_escape) state = stateInitial;
+	if InputPressed(INPUTS.BACK) state = stateInitial;
 	
 	draw_set_font(global.timefont);
 	
@@ -80,8 +80,8 @@ stateSelect = function(){
 	draw_set_halign(fa_left);
 	draw_set_valign(fa_top);
 	
-	if keyboard_check_pressed(ord("S")) currentSelection = currentSelection = optionCount - 1 ? 0 : min(currentSelection + 1, optionCount - 1);
-	if keyboard_check_pressed(ord("W")) currentSelection = currentSelection = 0 ? optionCount - 1 : max(currentSelection - 1, 0);
+	if InputPressed(INPUTS.DOWN) currentSelection = currentSelection = optionCount - 1 ? 0 : min(currentSelection + 1, optionCount - 1);
+	if InputPressed(INPUTS.UP) currentSelection = currentSelection = 0 ? optionCount - 1 : max(currentSelection - 1, 0);
 	
 	var xOrigin = 8,
 		yOrigin = room_width / 2 + 100,
@@ -103,7 +103,7 @@ stateSelect = function(){
 		}
 	}
 	
-	if (selecting && mouse_check_button_pressed(mb_left)) or keyboard_check_pressed(vk_space){
+	if (selecting && InputPressed(INPUTS.MOUSECONFIRM)) or InputPressed(INPUTS.CONFIRM){
 		switch(currentSelection){
 			case 0:
 				state = stateTransitionToGame;
@@ -129,7 +129,7 @@ stateSelect = function(){
 }
 
 stateSettings = function(){
-	if keyboard_check_pressed(vk_escape) state = stateSelect;
+	if InputPressed(INPUTS.BACK) state = stateSelect;
 	
 	draw_set_font(global.timefont);
 	
@@ -138,8 +138,8 @@ stateSettings = function(){
 	draw_set_halign(fa_left);
 	draw_set_valign(fa_top);
 	
-	if keyboard_check_pressed(ord("S")) currentSettingsSelection = currentSettingsSelection = optionSettingsCount - 1 ? 0 : min(currentSettingsSelection + 1, optionSettingsCount - 1);
-	if keyboard_check_pressed(ord("W")) currentSettingsSelection = currentSettingsSelection = 0 ? optionSettingsCount - 1 : max(currentSettingsSelection - 1, 0);
+	if InputPressed(INPUTS.DOWN) currentSettingsSelection = currentSettingsSelection = optionSettingsCount - 1 ? 0 : min(currentSettingsSelection + 1, optionSettingsCount - 1);
+	if InputPressed(INPUTS.UP) currentSettingsSelection = currentSettingsSelection = 0 ? optionSettingsCount - 1 : max(currentSettingsSelection - 1, 0);
 	
 	var xOrigin = 8,
 		yOrigin = room_width / 2 + 100,
@@ -161,7 +161,7 @@ stateSettings = function(){
 		}
 	}
 	
-	if (settingsSelecting && mouse_check_button_pressed(mb_left)) or keyboard_check_pressed(vk_space){
+	if (settingsSelecting && InputPressed(INPUTS.MOUSECONFIRM)) or InputPressed(INPUTS.CONFIRM){
 		switch(currentSettingsSelection){
 			case 0:
 				global.dashInputType = global.dashInputType ? 0 : 1;
@@ -193,7 +193,7 @@ stateSettings = function(){
 	}
 	
 	draw_text_underline(currentSettingsX[0], yOrigin, settingsString[0]);
-	var str = string(global.dashInputType) = dashinput.double ? "double-tap" : "space";
+	var str = string(global.dashInputType) = dashinput.double ? "double-tap" : (InputDeviceGetPlayerUsingGamepad() = 0 ? "left bumpers" : "space");
 	draw_text_underline(room_width - string_width(str) - xOrigin, yOrigin, str);
 	
 	draw_text_underline(currentSettingsX[1], yOrigin + stringHeight + sep, settingsString[1]);

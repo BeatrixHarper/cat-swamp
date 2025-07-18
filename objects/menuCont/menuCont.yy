@@ -13,7 +13,10 @@
     "name":"Controllers",
     "path":"folders/Objects/Controllers.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"pausable",
+    "path":"objects/pausable/pausable.yy",
+  },
   "persistent":true,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,

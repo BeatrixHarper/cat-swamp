@@ -1,12 +1,12 @@
 if room = rm1{
 	if (instance_exists(objPlayer) && objPlayer.state != objPlayer.stateDead) or !instance_exists(objPlayer){
-		if keyboard_check_pressed(vk_escape){
+		if InputPressed(INPUTS.PAUSE){
 
-		global.inPauseMenu = global.inPauseMenu ? 0 : 1
+		global.inPauseMenu = global.inPauseMenu = 0 ? 1 : 0
 
 			if global.inPauseMenu{
 				if objPlayer.state = objPlayer.stateDead{ global.inPauseMenu = false; exit; }
-		
+				
 				if !sprite_exists(pauseScreenshot){
 					pauseScreenshot = sprite_create_from_surface(application_surface, 0, 0, surface_get_width(application_surface), surface_get_height(application_surface), false, false, 0, 0);
 				}
@@ -15,15 +15,14 @@ if room = rm1{
 				currentGuiScale = visCont.guiScale;
 				currentHealth = objPlayer.myHealth;
 				currentMaxHealth = objPlayer.maxHealth;
-
-				instance_deactivate_all(true);
-				instance_activate_object(__InputUpdateController);
+				
+				instance_deactivate_region(0, 0, room_width, room_height, true, true);
 			}
 			else if !global.inPauseMenu{
 				if sprite_exists(pauseScreenshot){
 					sprite_delete(pauseScreenshot);	
 				}
-				instance_activate_all();
+				instance_activate_region(0, 0, room_width, room_height, true);
 			}
 		}
 	}
@@ -47,7 +46,7 @@ if room = rm1{
 				var _chance = currentTime > 60 ? 50 : 75;
 		
 				repeat(random(100) >= _chance ? 3 : 2){
-					with(instance_create_depth(random_range(_x1, _x2), random_range(_y1, _y2), depth, objSummonCircle)) summon = objBug;
+					with(instance_create_layer(random_range(_x1, _x2), random_range(_y1, _y2), "Instances", objSummonCircle)) summon = objBug;
 				}
 			}
 		}
@@ -60,7 +59,7 @@ if room = rm1{
 				var _chance = currentTime > 60 ? 75 : 90;
 		
 				repeat(random(100) >= _chance ? 2 : 1){
-					with(instance_create_depth(random_range(_x1, _x2), random_range(_y1, _y2), depth, objSummonCircle)) summon = objBuff;
+					with(instance_create_layer(random_range(_x1, _x2), random_range(_y1, _y2), "Instances", objSummonCircle)) summon = objBuff;
 				}
 			}
 		}
@@ -73,7 +72,7 @@ if room = rm1{
 				var _chance = currentTime > 60 ? 80 : 85;
 		
 				repeat(random(100) >= _chance ? 2 : 1){
-					with(instance_create_depth(random_range(_x1, _x2), random_range(_y1, _y2), depth, objSummonCircle)) summon = objWizard;
+					with(instance_create_layer(random_range(_x1, _x2), random_range(_y1, _y2), "Instances", objSummonCircle)) summon = objWizard;
 				}
 			}
 		}
@@ -93,27 +92,29 @@ if room = rm1{
 		}
 
 		if deadTimer > 30 && objPlayer.state = objPlayer.stateDead{
-			if keyboard_check_pressed(vk_space){ deadTimer = 0; state = stateStartNewRun; }
-			if keyboard_check_pressed(vk_escape){ deadTimer = 0; state = stateTransitionFromGame; }
+			if InputPressed(INPUTS.PAUSE){ deadTimer = 0; state = stateStartNewRun; }
+			if InputPressed(INPUTS.EXITRUN){ deadTimer = 0; state = stateTransitionFromGame; }
 		}
 	}
 	
 	if instance_exists(objPlayer){
 		if InputDeviceGetPlayerUsingGamepad() = 0{
-			InputCursorElasticSet(objPlayer.x, objPlayer.y, 0.4, 0, false);
+			objPlayer.cursorX = InputCursorX();
+			objPlayer.cursorY = InputCursorY();
+			
+			InputCursorElasticSet(objPlayer.x, objPlayer.y, 0.3, 0, false);
 			InputCursorLimitCircle(objPlayer.x, objPlayer.y, 32);
 		}
+		else{
+			objPlayer.cursorX = mouse_x;
+			objPlayer.cursorY = mouse_y;
+		}
 	}
-}
-
-if keyboard_check_pressed(vk_f4){
-	global.fullscreen = global.fullscreen ? 0 : 1;
-	window_set_fullscreen(global.fullscreen);
 }
 
 if !global.inPauseMenu{
 	//fog
 	if random(10) <= 1 && instance_number(objFog) < 3{
-		instance_create_depth(x, y, depth, objFog);	
+		instance_create_layer(x, y, "Instances", objFog);	
 	}	
 }

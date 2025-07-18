@@ -13,8 +13,11 @@ maxSpeed = 1.4 + friction;
 
 canHit = true;
 
+cursorX = mouse_x;
+cursorY = mouse_y;
+
 right = false;
-gunAngle = point_direction(x, y, mouse_x, mouse_y);
+gunAngle = point_direction(x, y, cursorX, cursorY);
 
 maxHealth = 6;
 myHealth = maxHealth;
@@ -45,26 +48,19 @@ hit = false;
 hitalarm = -1;
 
 stateFree = function() {
-	mMove[move.left] = keyboard_check(ord("A"));
-	mMove[move.right] = keyboard_check(ord("D"));
-	mMove[move.up] = keyboard_check(ord("W"));
-	mMove[move.down] = keyboard_check(ord("S"));
+	var mMovement = InputDirection(-1, CLUSTERS.NAVIGATION);
+	
+	mMove[move.left] = InputCheck(INPUTS.LEFT);
+	mMove[move.right] = InputCheck(INPUTS.RIGHT)
+	mMove[move.up] = InputCheck(INPUTS.UP);
+	mMove[move.down] = InputCheck(INPUTS.DOWN);
 
-	mMovePressed[move.left] = keyboard_check_pressed(ord("A"));
-	mMovePressed[move.right] = keyboard_check_pressed(ord("D"));
-	mMovePressed[move.up] = keyboard_check_pressed(ord("W"));
-	mMovePressed[move.down] = keyboard_check_pressed(ord("S"));
+	mMovePressed[move.left] = InputPressed(INPUTS.LEFT);
+	mMovePressed[move.right] = InputPressed(INPUTS.RIGHT)
+	mMovePressed[move.up] = InputPressed(INPUTS.UP);
+	mMovePressed[move.down] = InputPressed(INPUTS.DOWN);
 	
-	var mH = mMove[move.right] - mMove[move.left],
-		mV = mMove[move.down] - mMove[move.up],
-		mMovement = point_direction(0, 0, mH, mV);
-		
-	if mMovement > 0{
-		mH /= mMovement;
-		mV /= mMovement;
-	}
-	
-	if mH != 0 or mV != 0 motion_add(point_direction(0, 0, mH, mV), walkSpeed);
+	if mMovement != -1 motion_add(mMovement, walkSpeed);
 	
 	image_xscale = right ? 1 : -1;
 	
@@ -73,7 +69,7 @@ stateFree = function() {
 	
 	if speed > 0 sprite_index = sprWalk else sprite_index = sprIdle;
 	
-	gunAngle = point_direction(x, y, mouse_x, mouse_y);
+	gunAngle = point_direction(x, y, cursorX, cursorY);
 	
 	if(gunAngle < 90 || gunAngle > 270) right = 1;
 	if(gunAngle > 90 && gunAngle < 270) right = -1;
@@ -81,7 +77,7 @@ stateFree = function() {
 	if alarm[alarms.iframes] > 0 canHit = false;
 	
 	if coolDown coolDown--;
-	if mouse_check_button(mb_left) && coolDown <= 0 fire();
+	if InputCheck(INPUTS.FIRE) && coolDown <= 0 fire();
 	
 	if (hit && hitalarm = -1) {
 	   hitalarm = 1;
@@ -98,7 +94,7 @@ stateFree = function() {
 			break;
 			case dashinput.space:
 				for(var i = 0; i < 4; i++){
-					if mMove[i] && keyboard_check_pressed(vk_space){ dashDir = i; dash(); }	
+					if mMove[i] && InputPressed(INPUTS.DASH){ dashDir = i; dash(); }	
 				}
 			break;
 		}
@@ -106,7 +102,7 @@ stateFree = function() {
 
 	if myHealth <= 0{
 		var _rand = 10;
-		repeat(random_range(3, 5)) instance_create_depth(x + random_range(-_rand, _rand), y + random_range(-_rand, _rand), depth, objChunks);
+		repeat(random_range(3, 5)) instance_create_layer(x + random_range(-_rand, _rand), y + random_range(-_rand, _rand), "Instances", objChunks);
 		
 		mask_index = sprNone;
 		
@@ -148,6 +144,10 @@ on_draw = function() {
 
 		} else {
 		    draw_underline_ext(sprite_index, image_index, x, y - _yOffset, image_xscale, image_yscale, image_angle, image_blend, image_alpha, c_black);
+		}
+		
+		if InputDeviceGetPlayerUsingGamepad() = 0 && InputDirection(-1, CLUSTERS.AIMING){
+			draw_underline_ext(sprCursor, 0, InputCursorX(), InputCursorY(), 1, 1, 0, c_white, 1, c_black);
 		}
 		
 		//image_alpha = 1;

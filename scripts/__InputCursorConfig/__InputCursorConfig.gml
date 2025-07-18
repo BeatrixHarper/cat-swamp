@@ -8,11 +8,11 @@
 //Whether a player's cursor should follow the mouse when using the `INPUT_KBM` deivce (keyboard
 //and mouse). Set this macro to `false` to make the keyboard move the cursor via the cluster
 //defined below.
-#macro INPUT_CURSOR_MOUSE_CONTROL  true
+#macro INPUT_CURSOR_MOUSE_CONTROL  false
 
 //Cluster to read to move cursors when using a gamepad or keyboard. This cluster should be defined
 //alongside verbs and other clusters in `__InputConfigVerbs()`.
-#macro INPUT_CURSOR_CLUSTER  INPUT_CLUSTER.NAVIGATION
+#macro INPUT_CURSOR_CLUSTER  CLUSTERS.AIMING
 
 //Default speed of the cursor when using a gamepad or keyboard. This value is measured in pixels
 //per frame and as such is *not* inherently delta-timed. You can change the cursor speed at runtime

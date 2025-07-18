@@ -55,7 +55,7 @@ function draw_gui(){
 			var highscore = global.newScore ? "\n\n\n\nnew highscore!" : "\n\n";
 			
 			draw_set_font(global.timefont);
-			draw_text_underline(_x, _y, "you died" + highscore + "\n\nscore: " + string(global.points) + "\n\n\n\npress space to restart\n\npress escape to exit");
+			draw_text_underline(_x, _y, "you died" + highscore + "\n\nscore: " + string(global.points) + (InputDeviceGetPlayerUsingGamepad() = 0 ? "\n\n\nstart to restart\n\nselect to exit" : "\n\n\n\nescape to restart\n\nspace to exit"));
 		}
 	}
 }

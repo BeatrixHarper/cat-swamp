@@ -1,1 +1,1 @@
-if !instance_exists(menuCont) instance_create_depth(0, 0, 0, menuCont);
+if !instance_exists(menuCont) instance_create_layer(0, 0, "InstancesUI", menuCont);

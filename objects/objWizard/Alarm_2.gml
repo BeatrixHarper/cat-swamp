@@ -1,5 +1,5 @@
 for(var i = -1; i < 2; i++){
-	with(instance_create_depth(x, y, depth, objBullet, {team : tm.enemy, canDie : false})){
+	with(instance_create_layer(x, y, "Instances", objBullet, {team : tm.enemy, canDie : false})){
 		team = tm.enemy;
 		direction = other.gunAngle + (i * 20);
 		speed = 2;

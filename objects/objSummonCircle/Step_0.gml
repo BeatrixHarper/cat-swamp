@@ -4,6 +4,6 @@ if anim_end && sprite_index = sprSummonCircleAppear{
 }
 
 if anim_end && sprite_index = sprSummonCircleDisappear{
-	repeat(random_range(2, 3)) instance_create_depth(x + random_range(-10, 10), y + random_range(-10, 10), depth, objSummonParticle);
+	repeat(random_range(2, 3)) instance_create_layer(x + random_range(-10, 10), y + random_range(-10, 10), "Instances", objSummonParticle);
 	instance_destroy();	
 }
