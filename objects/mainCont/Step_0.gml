@@ -5,8 +5,6 @@ if room = rm1{
 		global.inPauseMenu = global.inPauseMenu = 0 ? 1 : 0
 
 			if global.inPauseMenu{
-				play_sfx(sndPause, 0, 1, true);
-				
 				if objPlayer.state = objPlayer.stateDead{ global.inPauseMenu = false; exit; }
 				
 				if !sprite_exists(pauseScreenshot){
@@ -19,6 +17,8 @@ if room = rm1{
 				currentMaxHealth = objPlayer.maxHealth;
 				
 				instance_deactivate_region(0, 0, room_width, room_height, true, true);
+				
+				play_sfx(sndPause, 0, 1, true);
 			}
 			else if !global.inPauseMenu{
 				if sprite_exists(pauseScreenshot){
